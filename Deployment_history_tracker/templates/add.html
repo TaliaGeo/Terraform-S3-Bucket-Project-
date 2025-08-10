@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Deployment Record</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 40px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add New Deployment Record</h1>
+
+    {% if message %}
+        <div class="message {% if 'error' in message.lower() or 'must be' in message.lower() %}error{% else %}success{% endif %}">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        <label for="application">Application</label>
+        <input type="text" id="application" name="application" required>
+
+        <label for="environment">Environment</label>
+        <input type="text" id="environment" name="environment" required>
+
+        <label for="version">Version</label>
+        <input type="text" id="version" name="version" required>
+
+        <label for="deployment_date">Deployment Date (YYYY-MM-DD)</label>
+        <input type="text" id="deployment_date" name="deployment_date" required>
+
+        <label for="deployed_by">Deployed By</label>
+        <input type="text" id="deployed_by" name="deployed_by" required>
+
+        <button type="submit">Add Record</button>
+    </form>
+
+    {% if records and records|length > 0 %}
+        <h2>Current Deployment Records</h2>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Application</th>
+                <th>Environment</th>
+                <th>Version</th>
+                <th>Deployment Date</th>
+                <th>Deployed By</th>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ record.Application }}</td>
+                <td>{{ record.Environment }}</td>
+                <td>{{ record.Version }}</td>
+                <td>{{ record.DeploymentDate }}</td>
+                <td>{{ record.DeployedBy }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+</body>
+</html>

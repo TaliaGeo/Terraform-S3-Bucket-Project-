@@ -1,0 +1,144 @@
+DeploymentTracker – Test Cases and Results
+==========================================
+
+Test Files Used
+---------------
+1. deployments.csv
+   A valid CSV file with correct headers and 3 valid records.
+
+2. emptycsv.csv
+   An empty CSV file used to test empty file handling.
+
+3. txtdeployments.txt
+   A text file with .txt extension used to test invalid file type handling.
+
+--------------------------------------------------
+Test Category: Load Records from CSV (Menu Option 1)
+--------------------------------------------------
+
+Test 1.1 – Load valid CSV file
+Input: deployments.csv
+Result: Loaded 3 records successfully
+Status: PASS
+
+Test 1.2 – Load non-existent file
+Input: nofile.csv
+Result: Error: File 'nofile.csv' does not exist
+Status: PASS
+
+Test 1.3 – Load empty CSV file
+Input: emptycsv.csv
+Result: Warning: The file is empty
+Status: PASS
+
+Test 1.4 – Load invalid extension file
+Input: txtdeployments.txt
+Result: Error: The file is not a CSV file
+Status: PASS
+
+---------------------------------------------------
+Test Category: Add New Record (Menu Option 2)
+---------------------------------------------------
+
+Test 2.1 – Add valid record
+Input: All fields filled correctly
+Result: Record added successfully
+Status: PASS
+
+Test 2.2 – Add record with missing field
+Input: Leave environment empty
+Result: Error: All fields must be provided
+Status: PASS
+
+Test 2.3 – Add record with invalid date
+Input: Use 06-29-2025 format
+Result: Error: DeploymentDate must be in YYYY-MM-DD format
+Status: PASS
+
+----------------------------------------------------
+Test Category: Update Existing Record (Menu Option 3)
+----------------------------------------------------
+
+Test 3.1 – Update existing record fully
+Input: Provide valid existing keys and change all fields
+Result: Fields updated with success messages
+Status: PASS
+
+Test 3.2 – Update partially (some fields blank)
+Input: Leave some new fields blank
+Result: Only non-empty fields updated, blanks skipped
+Status: PASS
+
+Test 3.3 – Update non-existent record
+Input: Wrong application/environment/version
+Result: Error: Record not found
+Status: PASS
+
+Test 3.4 – Update with invalid date
+Input: Use 2025/06/29 format
+Result: Error: DeploymentDate must be in YYYY-MM-DD format
+Status: PASS
+
+------------------------------------------------
+Test Category: Delete Record (Menu Option 4)
+------------------------------------------------
+
+Test 4.1 – Delete existing application
+Input: Existing application name
+Result: Record(s) deleted successfully
+Status: PASS
+
+Test 4.2 – Delete non-existent application
+Input: Application not in the record list
+Result: No records found to delete
+Status: PASS
+
+-------------------------------------------------
+Test Category: Display Records (Menu Option 5)
+-------------------------------------------------
+
+Test 5.1 – Display when records exist
+Input: After loading or adding records
+Result: Records displayed in formatted table
+Status: PASS
+
+Test 5.2 – Display when no records exist
+Input: Before loading or after deleting all records
+Result: No deployment records to display
+Status: PASS
+
+--------------------------------------------------
+Test Category: Save Records to CSV (Menu Option 6)
+--------------------------------------------------
+
+Test 6.1 – Save when records exist
+Input: After load/add
+Result: New CSV file created with timestamped name
+Status: PASS
+
+Test 6.2 – Save when no records exist
+Input: No records in memory
+Result: No records to save
+Status: PASS
+
+-------------------------------------------------------------
+Test Category: Menu Navigation and Input Validation (General)
+-------------------------------------------------------------
+
+Test 7.1 – Invalid menu option
+Input: 0, 9, abc
+Result: Invalid choice message printed
+Status: PASS
+
+Test 7.2 – Exit program
+Input: Option 7
+Result: Exits program with goodbye message
+Status: PASS
+
+Final Notes
+-----------
+- All test cases executed successfully and returned expected results.
+- All input validation and error handling mechanisms worked as intended.
+- CSV file handling, record management (add, update, delete), and data persistence (save/load) are functioning correctly.
+- The user interface via the menu is intuitive and prevents invalid inputs.
+

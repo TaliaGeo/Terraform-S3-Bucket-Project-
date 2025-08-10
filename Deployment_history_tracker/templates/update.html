@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Deployment Record</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 40px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0069d9;
+        }
+        .message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Update Deployment Record</h1>
+
+    {% if message %}
+        <div class="message {% if 'error' in message.lower() or 'not found' in message.lower() %}error{% else %}success{% endif %}">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        <h3>Original Record Identifiers</h3>
+        <label for="original_application">Original Application</label>
+        <input type="text" name="original_application" id="original_application" required>
+
+        <label for="original_environment">Original Environment</label>
+        <input type="text" name="original_environment" id="original_environment" required>
+
+        <label for="original_version">Original Version</label>
+        <input type="text" name="original_version" id="original_version" required>
+
+        <h3>New Values (leave blank to skip)</h3>
+        <label for="new_application">New Application</label>
+        <input type="text" name="new_application" id="new_application">
+
+        <label for="new_environment">New Environment</label>
+        <input type="text" name="new_environment" id="new_environment">
+
+        <label for="new_version">New Version</label>
+        <input type="text" name="new_version" id="new_version">
+
+        <label for="new_deployment_date">New Deployment Date (YYYY-MM-DD)</label>
+        <input type="text" name="new_deployment_date" id="new_deployment_date">
+
+        <label for="new_deployed_by">New Deployed By</label>
+        <input type="text" name="new_deployed_by" id="new_deployed_by">
+
+        <button type="submit">Update Record</button>
+    </form>
+
+    {% if records and records|length > 0 %}
+        <h2>Current Deployment Records</h2>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Application</th>
+                <th>Environment</th>
+                <th>Version</th>
+                <th>Deployment Date</th>
+                <th>Deployed By</th>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ record.Application }}</td>
+                <td>{{ record.Environment }}</td>
+                <td>{{ record.Version }}</td>
+                <td>{{ record.DeploymentDate }}</td>
+                <td>{{ record.DeployedBy }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+</body>
+</html>

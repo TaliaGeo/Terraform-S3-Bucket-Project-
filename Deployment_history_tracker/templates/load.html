@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}Load Records{% endblock %}
+
+{% block content %}
+<h2>Load Deployment Records from CSV</h2>
+
+<form method="POST">
+  <div class="mb-3">
+    <label for="file_path" class="form-label">CSV File Path</label>
+    <input type="text" class="form-control" id="file_path" name="file_path" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Load</button>
+</form>
+
+{% if records %}
+  <h3 class="mt-4">Current Records:</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Application</th>
+        <th>Environment</th>
+        <th>Version</th>
+        <th>Deployment Date</th>
+        <th>Deployed By</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rec in records %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ rec.Application }}</td>
+        <td>{{ rec.Environment }}</td>
+        <td>{{ rec.Version }}</td>
+        <td>{{ rec.DeploymentDate }}</td>
+        <td>{{ rec.DeployedBy }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+{% endblock %}

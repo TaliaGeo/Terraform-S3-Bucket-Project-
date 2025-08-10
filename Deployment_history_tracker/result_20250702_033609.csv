@@ -1,0 +1,7 @@
+Application,Environment,Version,DeploymentDate,DeployedBy
+App1,development,1.0,2024-08-06,Saeed
+App1,production,1.0,2024-08-06,Talia
+App2,staging,2.0,2024-08-04,Mai
+App3,production,1.1,2024-03-08,Ali
+App9,production,9,2024-08-12,Mohammad
+App2,development,5.5,2025-06-25,Tala

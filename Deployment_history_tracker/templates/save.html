@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Save Deployment Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f5;
+            padding: 40px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Save Deployment Records</h1>
+
+    {% if message %}
+        <div class="message {% if 'error' in message.lower() %}error{% else %}success{% endif %}">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    {% if records and records|length > 0 %}
+        <h2>Current Deployment Records</h2>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Application</th>
+                <th>Environment</th>
+                <th>Version</th>
+                <th>Deployment Date</th>
+                <th>Deployed By</th>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ record.Application }}</td>
+                <td>{{ record.Environment }}</td>
+                <td>{{ record.Version }}</td>
+                <td>{{ record.DeploymentDate }}</td>
+                <td>{{ record.DeployedBy }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No records found to display.</p>
+    {% endif %}
+
+</body>
+</html>
