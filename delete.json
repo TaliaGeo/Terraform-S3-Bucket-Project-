@@ -1,0 +1,16 @@
+{
+    "Objects": [
+        {
+            "Key": "myfile.txt",
+            "VersionId": "null"
+        },
+        {
+            "Key": "test.txt",
+            "VersionId": "6XUoXDsrkYx_DgMVznNmJ_YdoUsWUR0x"
+        },
+        {
+            "Key": "test.txt",
+            "VersionId": "F0NLGRCcETFiMrVaWcXnf9roam_iZZay"
+        }
+    ]
+}
